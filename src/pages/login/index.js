@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, Navigate } from "react-router-dom";
 
 const LoginContainer = styled.div`
   display: flex;
@@ -32,7 +33,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   width: 50%;
   h1 {
     font-size: 30px;
@@ -62,24 +62,28 @@ const Form = styled.form`
     background-color: #963fb5;
     color: white;
   }
-  p {
-    color: white;
-    font-size: 12px;
-    margin: 10px 0;
-    cursor: pointer;
-  }
-  a {
-    color: white;
-    font-size: 12px;
-    margin: 10px 0;
-    cursor: pointer;
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-  }
+`;
+const Signup = styled.a`
+  color: white;
+  font-size: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+`;
+const ForgotPassword = styled.a`
+  color: white;
+  font-size: 12px;
+  margin: 10px 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 `;
 
 function index() {
+  const handleLogin = () => {
+    console.log("login");
+    Navigate("/dashboard");
+  };
   return (
     <>
       <LoginContainer>
@@ -93,9 +97,16 @@ function index() {
               <input type="text" placeholder="Username" />
               <input type="text" placeholder="Password" />
             </div>
-            <a>Forgot Password?</a>
-            <button type="submit">Sign In</button>
-            <p>Don't have an account? Sign Up</p>
+            <ForgotPassword>Forgot Password?</ForgotPassword>
+            <button type="submit" onClick={handleLogin}>
+              Sign In
+            </button>
+            <Signup>
+              Don't have an account?
+              <Link to="/register" style={{ color: "white" }}>
+                Sign Up
+              </Link>
+            </Signup>
           </Form>
         </RightContainer>
       </LoginContainer>
