@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, Navigate } from "react-router-dom";
+import { useState } from "react";
 
 const RegisterContainer = styled.div`
   display: flex;
@@ -56,7 +58,25 @@ const Buttons = styled.div`
   }
 `;
 
-function index() {
+function RegistrationPage() {
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    console.log("signup");
+  };
+
+  const handleEvent = (e) => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+    console.log(user);
+  };
   return (
     <>
       <RegisterContainer>
@@ -68,26 +88,56 @@ function index() {
             <h1>Sign Up</h1>
             <div>
               <p>First Name</p>
-              <input type="text" />
+              <input
+                type="text"
+                name="firstName"
+                value={user.firstName}
+                onChange={handleEvent}
+              />
 
               <p>Last Name</p>
-              <input type="text" />
+              <input
+                type="text"
+                name="lastName"
+                value={user.lastName}
+                onChange={handleEvent}
+              />
 
               <p>Email</p>
-              <input type="email" />
+              <input
+                type="email"
+                name="email"
+                value={user.email}
+                onChange={handleEvent}
+              />
 
               <p>Username</p>
-              <input type="text" />
+              <input
+                type="text"
+                name="username"
+                value={user.username}
+                onChange={handleEvent}
+              />
 
               <p>Password</p>
-              <input type="password" />
+              <input
+                type="password"
+                name="password"
+                value={user.password}
+                onChange={handleEvent}
+              />
 
               <p>Confirm Password</p>
-              <input type="password" />
+              <input
+                type="password"
+                name="confirmPassword"
+                value={user.confirmPassword}
+                onChange={handleEvent}
+              />
             </div>
             <Buttons>
-              <button>Sign Up</button>
-              <a>Sign In</a>
+              <button onClick={handleSignup}>Sign Up</button>
+              <Link to="/">Sign In</Link>
             </Buttons>
           </Form>
         </RightContainer>
@@ -96,4 +146,4 @@ function index() {
   );
 }
 
-export default index;
+export default RegistrationPage;
